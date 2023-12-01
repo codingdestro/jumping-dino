@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const canva = document.querySelector(".canva") as HTMLCanvasElement;
   canva.width = size.w;
   canva.height = size.h;
-  const ctx = canva.getContext("2d");
+  const ctx = canva.getContext("2d") as CanvasRenderingContext2D;
 
   const button = document.querySelector(".btn") as HTMLElement;
   const scorePanel = document.querySelector(".score span") as HTMLElement;
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx?.drawImage(this.img, this.x, this.y, this.w, this.h);
       this.move();
     }
-    // move the cactus 
+    // move the cactus
     move() {
       this.x -= this.speed;
       this.area = [
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  //array of cactus 
+  //array of cactus
   let objects: Cactus[] = [new Cactus()];
 
   //dino the main charactor
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.xoffset = this.x + this.size.w;
       this.yoffset = this.y + this.size.h;
       this.img = new Image();
-      this.img.src = `./assets/dino/Dino${random(1, 5)}.png`;
+      this.img.src = `./dino/Dino${random(1, 5)}.png`;
       this.ground = size.h - 50;
     }
 
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.collide();
     }
 
-    //jumping handling 
+    //jumping handling
     jump() {
       this.y += this.velocity;
       this.velocity += this.g;

@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
             this.move();
         }
-        // move the cactus 
+        // move the cactus
         move() {
             this.x -= this.speed;
             this.area = [
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ];
         }
     }
-    //array of cactus 
+    //array of cactus
     let objects = [new Cactus()];
     //dino the main charactor
     class Dino {
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.xoffset = this.x + this.size.w;
             this.yoffset = this.y + this.size.h;
             this.img = new Image();
-            this.img.src = `./assets/dino/Dino${random(1, 5)}.png`;
+            this.img.src = `./dino/Dino${random(1, 5)}.png`;
             this.ground = size.h - 50;
         }
         //draw the dino
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.yoffset = this.y + this.size.h;
             this.collide();
         }
-        //jumping handling 
+        //jumping handling
         jump() {
             this.y += this.velocity;
             this.velocity += this.g;
