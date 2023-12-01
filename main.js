@@ -18,9 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     hscore.innerHTML = (_a = localStorage.getItem("score")) !== null && _a !== void 0 ? _a : "";
     const over = document.querySelector(".gameover");
     scorePanel.innerHTML = score.toString();
+    //random number generator between min and max
     const random = (min, max) => {
         return Math.floor(Math.random() * (max - min) + min);
     };
+    // for background anitmation and moving
     class Background {
         constructor() {
             this.x = 0;
@@ -35,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.ground = new Image();
             this.ground.src = "./assets/ground.png";
         }
+        //draw backgrounds
         draw() {
             ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(this.img, 0, 0);
             ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(this.top, this.x, 0);
@@ -43,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(this.ground, this.groundX + size.w, 0);
             this.update();
         }
+        //move backgrounds
         update() {
             this.x -= this.speed;
             this.groundX -= this.groundSpeed;
@@ -54,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
+    //cactus animation and movement
     class Cactus {
         constructor() {
             this.w = 20;
@@ -73,10 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 [this.y, this.y + this.h],
             ];
         }
+        //draw the cactus
         draw() {
             ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
             this.move();
         }
+        // move the cactus 
         move() {
             this.x -= this.speed;
             this.area = [
@@ -85,7 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ];
         }
     }
+    //array of cactus 
     let objects = [new Cactus()];
+    //dino the main charactor
     class Dino {
         constructor() {
             this.x = 50;
@@ -107,9 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
             this.img.src = `./assets/dino/Dino${random(1, 5)}.png`;
             this.ground = size.h - 50;
         }
+        //draw the dino
         draw() {
             ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(this.img, this.frames * this.size.w, 0, this.size.w, this.size.h, this.x, this.y, this.size.w, this.size.h);
         }
+        //running animation
         running() {
             if (this.frames >= 10) {
                 this.frames = 4;
@@ -123,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.yoffset = this.y + this.size.h;
             this.collide();
         }
+        //jumping handling 
         jump() {
             this.y += this.velocity;
             this.velocity += this.g;
@@ -132,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.jumped = false;
             }
         }
+        //collide handling from cactus
         collide() {
             for (let i = 0; i < (objects.length > 1 ? 2 : 1); i++) {
                 if (this.x < objects[i].area[0][1] &&
