@@ -19,10 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const over = document.querySelector(".gameover") as HTMLElement;
   scorePanel.innerHTML = score.toString();
 
+  //random number generator between min and max
   const random = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min) + min);
   };
 
+  // for background anitmation and moving
   class Background {
     x = 0;
     y = 0;
@@ -42,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
       this.ground = new Image();
       this.ground.src = "./assets/ground.png";
     }
+
+    //draw backgrounds
     draw() {
       ctx?.drawImage(this.img, 0, 0);
       ctx?.drawImage(this.top, this.x, 0);
@@ -50,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx?.drawImage(this.ground, this.groundX + size.w, 0);
       this.update();
     }
+
+    //move backgrounds
     update() {
       this.x -= this.speed;
       this.groundX -= this.groundSpeed;
@@ -62,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  //cactus animation and movement
   class Cactus {
     w = 20;
     h = 40;
@@ -69,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     y = 0;
     speed = 0;
     img: HTMLImageElement;
-    area: any[];
+    area: number[][];
     constructor() {
       this.w = 20;
       this.h = 40;
@@ -83,10 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
         [this.y, this.y + this.h],
       ];
     }
+    //draw the cactus
     draw() {
       ctx?.drawImage(this.img, this.x, this.y, this.w, this.h);
       this.move();
     }
+    // move the cactus 
     move() {
       this.x -= this.speed;
       this.area = [
@@ -96,8 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  //array of cactus 
   let objects: Cactus[] = [new Cactus()];
 
+  //dino the main charactor
   class Dino {
     x = 50;
     y = 0;
@@ -123,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.ground = size.h - 50;
     }
 
+    //draw the dino
     draw() {
       ctx?.drawImage(
         this.img,
@@ -136,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
         this.size.h,
       );
     }
+    //running animation
     running() {
       if (this.frames >= 10) {
         this.frames = 4;
@@ -148,6 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
       this.yoffset = this.y + this.size.h;
       this.collide();
     }
+
+    //jumping handling 
     jump() {
       this.y += this.velocity;
       this.velocity += this.g;
@@ -157,6 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
         this.jumped = false;
       }
     }
+
+    //collide handling from cactus
     collide() {
       for (let i = 0; i < (objects.length > 1 ? 2 : 1); i++) {
         if (
