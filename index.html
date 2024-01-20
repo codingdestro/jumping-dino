@@ -8,11 +8,17 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="score">score: <span></span></div>
-    <div class="hscore">high score: <span></span></div>
-    <button class="btn">start</button>
-    <div class="gameover">gamveover</div>
-    <canvas class="canva"> </canvas>
+    <div class="container">
+      <div class="score">score: <span></span></div>
+      <div class="hscore">high score: <span></span></div>
+      <button class="btn">start</button>
+      <div class="gameover">gamveover</div>
+      <canvas class="canva"> </canvas>
+    </div>
   </body>
-  <script src="main.js" defer></script>
+
+  <script src="utils.js" type="module" defer></script>
+  <script src="cactus.js" type="module" defer></script>
+  <script src="background.js" type="module" defer></script>
+  <script src="main.js" type="module" defer></script>
 </html>
