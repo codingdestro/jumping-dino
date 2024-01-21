@@ -5,6 +5,8 @@ import Cactus from "./cactus.js";
 import Dino from "./dino.js";
 let imageStack = [];
 
+const ad = [new Audio("./sounds/jump.mp3"), new Audio("./sounds/jump.mp3")];
+
 const size = {
   h: 216,
   w: 384,
@@ -83,7 +85,7 @@ const animate = () => {
     over.style.display = "block";
     startButton.style.display = "block";
     cancelAnimationFrame(requestFrame);
-    return true
+    return true;
   }
   dino.jump();
   frames++;
@@ -112,22 +114,24 @@ startButton.addEventListener("click", () => {
   score = 0;
   scorePanel.innerHTML = score.toString();
   lastFrames = 0;
-  objects.push(new Cactus(ctx,speed,size));
+  objects.push(new Cactus(ctx, speed, size));
   animate();
 });
 // banner();
+let toggleAudio = true;
 container.addEventListener("click", () => {
   if (!dino.jumped) {
     dino.velocity = -5;
     dino.jumped = true;
-    const ad = new Audio("./sounds/jump.mp3");
-    ad.play();
+
+    ad[toggleAudio ? 0 : 1].play();
+    toggleAudio = !toggleAudio;
   }
 });
 const interval = setInterval(() => {
   console.log("loading ...");
   if (imageStack.length === 0) {
     clearInterval(interval);
-    startButton.style.display = 'block'
+    startButton.style.display = "block";
   }
 }, 100);

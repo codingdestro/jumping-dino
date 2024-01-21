@@ -1,4 +1,5 @@
 import { random, loadImages } from "./utils.js";
+const sound = new Audio("./sounds/hit.mp3");
 export default class Dino {
   constructor(ctx, size) {
     this.x = 50;
@@ -22,7 +23,6 @@ export default class Dino {
   }
   //draw the dino
   draw() {
-    this.ctx.fillRect(this.x, this.y, this.size.w - 5, this.size.h);
     this.ctx.drawImage(
       this.img,
       this.frames * this.size.w,
@@ -62,11 +62,11 @@ export default class Dino {
   //collide handling from cactus
   collide(objects) {
     for (let i = 0; i < (objects.length > 1 ? 2 : 1); i++) {
-      if (this.x < objects[i].area[0][1] && this.xoffset > objects[i].area[0][0]) {
-        if (
-          this.yoffset > objects[i].area[1][0] 
-        ) {
-          const sound = new Audio("./sounds/hit.mp3");
+      if (
+        this.x < objects[i].area[0][1] &&
+        this.xoffset > objects[i].area[0][0]
+      ) {
+        if (this.yoffset > objects[i].area[1][0]) {
           sound.play();
           return true;
         }

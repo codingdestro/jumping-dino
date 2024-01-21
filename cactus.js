@@ -25,7 +25,6 @@ export default class Cactus {
   }
   //draw the cactus
   draw() {
-    this.ctx.fillRect(this.x, this.y, this.w - 3, this.h);
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
     this.move();
   }
